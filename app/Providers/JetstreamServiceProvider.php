@@ -2,7 +2,11 @@
 
 namespace App\Providers;
 
+use App\Actions\Jetstream\AddTeamMember;
+use App\Actions\Jetstream\CreateTeam;
+use App\Actions\Jetstream\DeleteTeam;
 use App\Actions\Jetstream\DeleteUser;
+use App\Actions\Jetstream\UpdateTeamName;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Jetstream\Jetstream;
 
@@ -27,11 +31,15 @@ class JetstreamServiceProvider extends ServiceProvider
     {
         $this->configurePermissions();
 
+        Jetstream::createTeamsUsing(CreateTeam::class);
+        Jetstream::updateTeamNamesUsing(UpdateTeamName::class);
+        Jetstream::addTeamMembersUsing(AddTeamMember::class);
+        Jetstream::deleteTeamsUsing(DeleteTeam::class);
         Jetstream::deleteUsersUsing(DeleteUser::class);
     }
 
     /**
-     * Configure the permissions that are available within the application.
+     * Configure the roles and permissions that are available within the application.
      *
      * @return void
      */
@@ -39,11 +47,35 @@ class JetstreamServiceProvider extends ServiceProvider
     {
         Jetstream::defaultApiTokenPermissions(['read']);
 
-        Jetstream::permissions([
+        Jetstream::role('admin', __('Administrator'), [
             'create',
             'read',
             'update',
             'delete',
-        ]);
+        ])->description(__('Administrator users can perform any action.'));
+        
+        Jetstream::role('finance', __('Finance'), [
+            'read',
+            'create',
+            'update',
+        ])->description(__('Finance users have the ability to read, create, and update.'));
+
+        Jetstream::role('sales', __('Sales'), [
+            'read',
+            'create',
+            'update',
+        ])->description(__('Sales users have the ability to read, create, and update.'));
+
+        Jetstream::role('hr', __('HR'), [
+            'read',
+            'create',
+            'update',
+        ])->description(__('HR users have the ability to read, create, and update.'));
+
+        Jetstream::role('technology', __('Technology'), [
+            'read',
+            'create',
+            'update',
+        ])->description(__('Technology users have the ability to read, create, and update.'));
     }
 }
