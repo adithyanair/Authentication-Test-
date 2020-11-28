@@ -58,24 +58,28 @@ class JetstreamServiceProvider extends ServiceProvider
             'read',
             'create',
             'update',
+            'delete',
         ])->description(__('Finance users have the ability to read, create, and update.'));
 
         Jetstream::role('sales', __('Sales'), [
             'read',
             'create',
             'update',
+            'delete',
         ])->description(__('Sales users have the ability to read, create, and update.'));
 
         Jetstream::role('hr', __('HR'), [
             'read',
             'create',
             'update',
+            'delete',
         ])->description(__('HR users have the ability to read, create, and update.'));
 
         Jetstream::role('technology', __('Technology'), [
             'read',
             'create',
             'update',
+            'delete',
         ])->description(__('Technology users have the ability to read, create, and update.'));
     }
 }

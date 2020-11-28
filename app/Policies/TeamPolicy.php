@@ -53,7 +53,12 @@ class TeamPolicy
      */
     public function update(User $user, Team $team)
     {
-        return $user->ownsTeam($team);
+        // return $user->ownsTeam($team);
+        $role = $user->teamRole($team);
+        if ($role->key == 'admin' || $user->ownsTeam($team)) {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -65,7 +70,12 @@ class TeamPolicy
      */
     public function addTeamMember(User $user, Team $team)
     {
-        return $user->ownsTeam($team);
+        // return $user->ownsTeam($team) || 
+        $role = $user->teamRole($team);
+        if ($role->key == 'admin' || $user->ownsTeam($team)) {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -77,7 +87,13 @@ class TeamPolicy
      */
     public function updateTeamMember(User $user, Team $team)
     {
-        return $user->ownsTeam($team);
+        // return $user->ownsTeam($team);
+        // return $user->teamRole($team) == "admin";
+        $role = $user->teamRole($team);
+        if ($role->key == 'admin' || $user->ownsTeam($team)) {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -89,7 +105,13 @@ class TeamPolicy
      */
     public function removeTeamMember(User $user, Team $team)
     {
-        return $user->ownsTeam($team);
+        // return $user->ownsTeam($team);
+        // return $user->teamRole($team) == "admin";
+        $role = $user->teamRole($team);
+        if ($role->key == 'admin' || $user->ownsTeam($team)) {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -101,6 +123,11 @@ class TeamPolicy
      */
     public function delete(User $user, Team $team)
     {
-        return $user->ownsTeam($team);
+        // return $user->ownsTeam($team);
+        $role = $user->teamRole($team);
+        if ($role->key == 'admin' || $user->ownsTeam($team)) {
+            return true;
+        }
+        return false;
     }
 }
