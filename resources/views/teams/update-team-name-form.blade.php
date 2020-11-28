@@ -9,7 +9,7 @@
 
     <x-slot name="form">
         <!-- Team Owner Information -->
-        <div class="col-span-6">
+        <div class="col-span-6" style="display: none;">
             <x-jet-label value="{{ __('Team Owner') }}" />
 
             <div class="flex items-center mt-2">
